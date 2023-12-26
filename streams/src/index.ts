@@ -47,16 +47,16 @@ const ws = new stream.Writable({
     write: processObjectStream
 });
 
-function processObjectStream(streamObject: any, _encoding: any, cb: any) {
-    const sortedArray = sortObjectKeysToArray(streamObject);
-    fs.writeFileSync(OUTPUT_FILE, sortedArray.toString());
-    cb();
-}
-
-function sortObjectKeysToArray(object: any): any[] {
-    const arr = [];
+function sortObjectKeysToArray(object: any): string[] {
+    const arr: string[] = [];
     Object.keys(object).sort().forEach(k => arr.push(object[k]));
     return arr;
-};
+}
+
+function processObjectStream(streamObject: any, _encoding: any, cb: any) {
+    const sortedArray: string[] = sortObjectKeysToArray(streamObject);
+    const writeStream = fs.createWriteStream(OUTPUT_FILE);
+    writeStream.write(sortedArray.toString(), cb);
+}
 
 rs.pipe(split).pipe(wordCountTransformer).pipe(ws);
