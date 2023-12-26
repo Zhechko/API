@@ -36,10 +36,12 @@ function displayTree(currentPath: string, currentDepth: number, options: Options
   const { depth = Infinity } = options;
   const files = readDirectory(currentPath);
 
-  files.forEach((file: string, fileIndex: number) => {
-    const filePath = join(currentPath, file);
-    handleFile(file, filePath, currentDepth, depth, options, directoryFileCount, parentPrefix, fileIndex, files.length);
-  });
+  if (currentDepth <= depth) {
+    files.forEach((file: string, fileIndex: number) => {
+      const filePath = join(currentPath, file);
+      handleFile(file, filePath, currentDepth, depth, options, directoryFileCount, parentPrefix, fileIndex, files.length);
+    });
+  }
 }
 
 function readDirectory(directoryPath: string): string[] {

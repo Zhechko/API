@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node --esm src/task_1.ts",
-    "run": "ts-node --esm src/index.ts --target /Users/bison/Developer/playground/cli/example --depth 2"
+    "run": "ts-node --esm src/index.ts --target /Users/bison/Developer/API/cli/example --depth 1"
   },
   "keywords": [],
   "author": "",
